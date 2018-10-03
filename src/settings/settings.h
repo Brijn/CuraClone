@@ -96,6 +96,12 @@ enum class EGCodeFlavor
  * Real RepRap GCode suitable for printers using RepRap firmware (e.g. Duet controllers)
  **/
     REPRAP = 8,
+
+/**
+ *  Beckhoff flavour is used in beckhoff modules.
+ *
+ **/
+    BECKHOFF = 9,
 };
 
 /*!
