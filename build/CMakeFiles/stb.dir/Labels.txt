@@ -1,0 +1,13 @@
+# Target labels
+ stb
+# Source files and their labels
+/home/bart/Documents/Cura/CuraEngine/build/CMakeFiles/stb
+/home/bart/Documents/Cura/CuraEngine/build/CMakeFiles/stb.rule
+/home/bart/Documents/Cura/CuraEngine/build/CMakeFiles/stb-complete.rule
+/home/bart/Documents/Cura/CuraEngine/build/stb-prefix/src/stb-stamp/stb-install.rule
+/home/bart/Documents/Cura/CuraEngine/build/stb-prefix/src/stb-stamp/stb-mkdir.rule
+/home/bart/Documents/Cura/CuraEngine/build/stb-prefix/src/stb-stamp/stb-download.rule
+/home/bart/Documents/Cura/CuraEngine/build/stb-prefix/src/stb-stamp/stb-update.rule
+/home/bart/Documents/Cura/CuraEngine/build/stb-prefix/src/stb-stamp/stb-patch.rule
+/home/bart/Documents/Cura/CuraEngine/build/stb-prefix/src/stb-stamp/stb-configure.rule
+/home/bart/Documents/Cura/CuraEngine/build/stb-prefix/src/stb-stamp/stb-build.rule

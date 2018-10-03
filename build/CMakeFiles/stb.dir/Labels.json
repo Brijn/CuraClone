@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/bart/Documents/Cura/CuraEngine/build/CMakeFiles/stb"
+		},
+		{
+			"file" : "/home/bart/Documents/Cura/CuraEngine/build/CMakeFiles/stb.rule"
+		},
+		{
+			"file" : "/home/bart/Documents/Cura/CuraEngine/build/CMakeFiles/stb-complete.rule"
+		},
+		{
+			"file" : "/home/bart/Documents/Cura/CuraEngine/build/stb-prefix/src/stb-stamp/stb-install.rule"
+		},
+		{
+			"file" : "/home/bart/Documents/Cura/CuraEngine/build/stb-prefix/src/stb-stamp/stb-mkdir.rule"
+		},
+		{
+			"file" : "/home/bart/Documents/Cura/CuraEngine/build/stb-prefix/src/stb-stamp/stb-download.rule"
+		},
+		{
+			"file" : "/home/bart/Documents/Cura/CuraEngine/build/stb-prefix/src/stb-stamp/stb-update.rule"
+		},
+		{
+			"file" : "/home/bart/Documents/Cura/CuraEngine/build/stb-prefix/src/stb-stamp/stb-patch.rule"
+		},
+		{
+			"file" : "/home/bart/Documents/Cura/CuraEngine/build/stb-prefix/src/stb-stamp/stb-configure.rule"
+		},
+		{
+			"file" : "/home/bart/Documents/Cura/CuraEngine/build/stb-prefix/src/stb-stamp/stb-build.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"stb"
+		],
+		"name" : "stb"
+	}
+}
