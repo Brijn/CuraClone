@@ -101,6 +101,8 @@ private:
 
     std::ostream* output_stream;
     std::string new_line;
+    std::string comment_start;
+    std::string comment_end;
 
     double current_e_value; //!< The last E value written to gcode (in mm or mm^3)
 

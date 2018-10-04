@@ -93,6 +93,15 @@ void GCodeExport::preSetup(const MeshGroup* meshgroup)
         new_line = "\n";
     }
 
+    if(flavor == EGCodeFlavor::BECKHOFF){
+        comment_start = "(";
+        comment_end = ")";
+    }
+    else{
+        comment_start = ";";
+        comment_end = "";
+    }
+
     // initialize current_max_z_feedrate to firmware defaults
     for (unsigned int extruder_nr = 0; extruder_nr < extruder_count; extruder_nr++)
     {
@@ -191,8 +200,8 @@ std::string GCodeExport::getFileHeader(const std::vector<bool>& extruder_is_used
         prefix << ";END_OF_HEADER" << new_line;
         break;
     default:
-        prefix << ";FLAVOR:" << toString(flavor) << new_line;
-        prefix << ";TIME:" << ((print_time)? static_cast<int>(*print_time) : 6666) << new_line;
+        prefix << comment_start << "FLAVOR:" << toString(flavor) << comment_end << new_line;
+        prefix << comment_start << "TIME:" << ((print_time)? static_cast<int>(*print_time) : 6666) << comment_end << new_line;
         if (flavor == EGCodeFlavor::ULTIGCODE)
         {
             prefix << ";MATERIAL:" << ((filament_used.size() >= 1)? static_cast<int>(filament_used[0]) : 6666) << new_line;
@@ -439,7 +448,7 @@ void GCodeExport::updateTotalPrintTime()
 
 void GCodeExport::writeComment(const std::string& comment)
 {
-    *output_stream << ";";
+    *output_stream << comment_start;
     for (unsigned int i = 0; i < comment.length(); i++)
     {
         if (comment[i] == '\n')
@@ -449,12 +458,12 @@ void GCodeExport::writeComment(const std::string& comment)
             *output_stream << comment[i];
         }
     }
-    *output_stream << new_line;
+    *output_stream << comment_end << new_line;
 }
 
 void GCodeExport::writeTimeComment(const double time)
 {
-    *output_stream << ";TIME_ELAPSED:" << time << new_line;
+    *output_stream << comment_start << "TIME_ELAPSED:" << time << comment_end << new_line;
 }
 
 void GCodeExport::writeTypeComment(const PrintFeatureType& type)
@@ -462,28 +471,28 @@ void GCodeExport::writeTypeComment(const PrintFeatureType& type)
     switch (type)
     {
         case PrintFeatureType::OuterWall:
-            *output_stream << ";TYPE:WALL-OUTER" << new_line;
+            *output_stream << comment_start << "TYPE:WALL-OUTER" << comment_end << new_line;
             break;
         case PrintFeatureType::InnerWall:
-            *output_stream << ";TYPE:WALL-INNER" << new_line;
+            *output_stream << comment_start << "TYPE:WALL-INNER" << comment_end << new_line;
             break;
         case PrintFeatureType::Skin:
-            *output_stream << ";TYPE:SKIN" << new_line;
+            *output_stream << comment_start << "TYPE:SKIN" << comment_end << new_line;
             break;
         case PrintFeatureType::Support:
-            *output_stream << ";TYPE:SUPPORT" << new_line;
+            *output_stream << comment_start << "TYPE:SUPPORT" << comment_end << new_line;
             break;
         case PrintFeatureType::SkirtBrim:
-            *output_stream << ";TYPE:SKIRT" << new_line;
+            *output_stream << comment_start << "TYPE:SKIRT" << comment_end << new_line;
             break;
         case PrintFeatureType::Infill:
-            *output_stream << ";TYPE:FILL" << new_line;
+            *output_stream << comment_start << "TYPE:FILL" << comment_end << new_line;
             break;
         case PrintFeatureType::SupportInfill:
-            *output_stream << ";TYPE:SUPPORT" << new_line;
+            *output_stream << comment_start << "TYPE:SUPPORT" << comment_end << new_line;
             break;
         case PrintFeatureType::SupportInterface:
-            *output_stream << ";TYPE:SUPPORT-INTERFACE" << new_line;
+            *output_stream << comment_start << "TYPE:SUPPORT-INTERFACE" << comment_end << new_line;
         case PrintFeatureType::MoveCombing:
         case PrintFeatureType::MoveRetraction:
         default:
@@ -495,12 +504,12 @@ void GCodeExport::writeTypeComment(const PrintFeatureType& type)
 
 void GCodeExport::writeLayerComment(int layer_nr)
 {
-    *output_stream << ";LAYER:" << layer_nr << new_line;
+    *output_stream << comment_start << "LAYER:" << comment_end << layer_nr << new_line;
 }
 
 void GCodeExport::writeLayerCountComment(int layer_count)
 {
-    *output_stream << ";LAYER_COUNT:" << layer_count << new_line;
+    *output_stream << comment_start << "LAYER_COUNT:" << layer_count << new_line;
 }
 
 void GCodeExport::writeLine(const char* line)
@@ -512,11 +521,11 @@ void GCodeExport::writeExtrusionMode(bool set_relative_extrusion_mode)
 {
     if (set_relative_extrusion_mode)
     {
-        *output_stream << "M83 ;relative extrusion mode" << new_line;
+        *output_stream << "M83 " << comment_start << "relative extrusion mode" << comment_end << new_line;
     }
     else
     {
-        *output_stream << "M82 ;absolute extrusion mode" << new_line;
+        *output_stream << "M82 " << comment_start << "absolute extrusion mode" << comment_end << new_line;
     }
 }
 
@@ -709,7 +718,7 @@ void GCodeExport::writeExtrusion(int x, int y, int z, double speed, double extru
     // write new value of extrusion_offset, which will be remembered.
     if ((update_extrusion_offset) && (extrusion_offset != current_e_offset)) {
         current_e_offset = extrusion_offset;
-        *output_stream << ";FLOW_RATE_COMPENSATED_OFFSET = " << current_e_offset << new_line;
+        *output_stream << comment_start << "FLOW_RATE_COMPENSATED_OFFSET = " << current_e_offset << comment_end << new_line;
     }
 
     double new_e_value = current_e_value + extrusion_per_mm * diff.vSizeMM();
